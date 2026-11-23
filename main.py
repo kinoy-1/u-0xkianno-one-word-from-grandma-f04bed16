@@ -11,6 +11,12 @@ file outside this repository — the word lives in word.py, next to it.
 import os
 import sys
 
+# The grader runs `python3 -P -s main.py`: -P keeps the script's own
+# directory OUT of sys.path, so a plain `from word import WORD` fails
+# there (ModuleNotFoundError) even though it works under plain `python3`.
+# Put this file's directory back on sys.path first, using only __file__.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from word import WORD
 
 OUTPUT_PATH = "/output/entry.txt"
